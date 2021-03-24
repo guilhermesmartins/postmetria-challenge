@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model {
     use HasFactory;
-    protected $fillable = ['name', 'code', 'capital', 'region', 'subregion', 'population', 'demonym', 'nativeName'];
+    protected $fillable = ['name', 'capital', 'region', 'subregion', 'population', 'demonym', 'nativeName'];
 }

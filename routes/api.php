@@ -40,9 +40,15 @@ Route::post('/country/{country_name}', function($country_name) {
 
     $data = json_decode($response);
 
+    if(gettype($data) == 'object') return 'Country not found';
+
+    // //check if country exists
+    // $country_found = Country::where('name', ucfirst($country_name))->count();
+
+    // if($country_found != 0) return (new CountryResource($country_found))->response()->setStatusCode(409);
+
     return Country::create([
         'name' => $data[0]->name,
-        'code' => $data[0]->alpha2Code,
         'capital' => $data[0]->capital,
         'region' => $data[0]->region,
         'subregion' => $data[0]->subregion,
@@ -54,7 +60,7 @@ Route::post('/country/{country_name}', function($country_name) {
 
 Route::get('/country/{country_name}', function(string $country_name) {
     $country = Country::query()
-        ->where('name', ucfirst($country_name))
+        ->where('name', 'LIKE', ucfirst($country_name))
         ->orWhere('name', 'LIKE', "%{$country_name}%")
         ->get();
 

@@ -15,7 +15,6 @@ class CreateCountriesTable extends Migration {
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('code');
             $table->string('capital');
             $table->string('region');
             $table->string('subregion');
