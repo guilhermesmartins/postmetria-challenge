@@ -5,9 +5,7 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-include 'utils/simple_html_dom.php';
-
-//use Illuminate\Support\Facades\DB;
+//include 'utils/simple_html_dom.php';
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -67,36 +65,4 @@ Route::get('/countries', function() {
     $countries = Country::all();
 
     return CountryResource::collection($countries);
-});
-
-/** GOOGLE SCRAPPER  */
-Route::post('/google', function(Request $search) {
-    $formated_search = str_replace(' ', '%20', $search->text);
-
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_URL, 'https://google.com/search?q=' . $formated_search);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-    $response = curl_exec($ch);
-
-    curl_close($ch);
-
-    $html = new simple_html_dom();
-    $html->load($response);
-
-    $info_array = array();
-
-    foreach ($html->find('.g') as $link) {
-        array_push($info_array, [
-            'title' => $link->find('h3')->plaintext,
-            'desc' => '',
-            'link' => '',
-        ]);
-    }
-
-
-
-    return $info_array;
 });
