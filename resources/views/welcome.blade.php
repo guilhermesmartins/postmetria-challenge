@@ -1,3 +1,4 @@
+<!-- blade configured for the actual versions of laravel -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

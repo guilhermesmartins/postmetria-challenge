@@ -16,6 +16,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/country/{country_name}', function($country_name) {
     $curl = curl_init();
 
+    //the options/params needed to make the request
     curl_setopt_array($curl, [
         CURLOPT_URL => 'https://restcountries.eu/rest/v2/name/' . $country_name,
         CURLOPT_RETURNTRANSFER => true,
@@ -31,7 +32,9 @@ Route::post('/country/{country_name}', function($country_name) {
         ],
     ]);
 
+    //the response will come in json
     $response = curl_exec($curl);
+
     $err = curl_error($curl);
 
     curl_close($curl);
@@ -40,6 +43,7 @@ Route::post('/country/{country_name}', function($country_name) {
 
     $data = json_decode($response);
 
+    //if data is of type object this means that no country was found
     if(gettype($data) == 'object') return 'Country not found';
 
     // //check if country exists
@@ -47,6 +51,7 @@ Route::post('/country/{country_name}', function($country_name) {
 
     // if($country_found != 0) return (new CountryResource($country_found))->response()->setStatusCode(409);
 
+    //insert this country in the countries table
     return Country::create([
         'name' => $data[0]->name,
         'capital' => $data[0]->capital,
@@ -64,11 +69,13 @@ Route::get('/country/{country_name}', function(string $country_name) {
         ->orWhere('name', 'LIKE', "%{$country_name}%")
         ->get();
 
+    //filter the fields that are returned by $country
     return CountryResource::collection($country);
 });
 
 Route::get('/countries', function() {
     $countries = Country::all();
 
+    //return all the countries in db
     return CountryResource::collection($countries);
 });
