@@ -1,0 +1,62 @@
+<template>
+  <Route title="Pick a country" method="GET" path="/country/:country">
+    <form>
+      <input placeholder="Search for a country" v-model="country" type="text" />
+      <BaseButton
+        :loading="loading"
+        :disabled="loading"
+        @click="postCountry"
+        >Search</BaseButton
+      >
+    </form>
+    <div v-if="response" class="response">
+        <h2>Response</h2>
+        <div v-if="typeof response !== 'string'">
+            <ul v-for="(country, i) in response" :key="i">
+                <b> {{ country.name }} </b>
+                <li v-for="(item, j) in Object.entries(country)" :key="j"><b>{{item[0]}}:</b> {{item[1]}}</li>
+                <br />
+            </ul>
+        </div>
+        <p v-else>Country not found</p>
+    </div>
+  </Route>
+</template>
+
+<script>
+import Route from "./Route.vue";
+import BaseButton from "./BaseButton.vue";
+import api from "../api";
+
+export default {
+  name: "GetCountry",
+  components: {
+    Route,
+    BaseButton,
+  },
+  data() {
+    return {
+      country: "",
+      loading: false,
+      response: null,
+    };
+  },
+  methods: {
+    async postCountry() {
+      if (this.loading) return;
+      this.loading = true;
+      try {
+          const response = await api.get(
+            `/country/${this.country.toLowerCase()}`
+          );
+          this.response = response.data.data.length ? response.data.data : 'Country not found';
+          console.log(this.response)
+      } catch (error) {
+
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
+};
+</script>
