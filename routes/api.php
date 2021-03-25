@@ -30,6 +30,8 @@ Route::post('/country/{country_name}', function($country_name) {
             'x-rapidapi-host: restcountries-v1.p.radpidapi.com',
             'x-rapidapi-key: SIGN-UP-FOR-KEY'
         ],
+        CURLOPT_HEADER => 0,
+        CURLOPT_SSL_VERIFYPEER => 0
     ]);
 
     //the response will come in json
