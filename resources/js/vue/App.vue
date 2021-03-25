@@ -11,28 +11,28 @@
       be enabled in php.ini and installed in your machine.
     </p>
     <h1>Routes</h1>
-    <Route title="Register a country" method="POST" path="/country/:country">
-    </Route>
+    <PostCountry />
     <Route title="Pick a country" method="GET" path="/country/:country">
     </Route>
-    <Route title="Pick all countries" method="GET" path="/countries">
-    </Route>
+    <Route title="Pick all countries" method="GET" path="/countries"> </Route>
   </div>
 </template>
 
 <script>
-import Route from './components/Route.vue';
+import PostCountry from "./components/PostCountry.vue";
+import Route from "./components/Route.vue";
 
 export default {
-    name: 'App',
-    components: {
-        Route,
-    }
+  name: "App",
+  components: {
+    Route,
+    PostCountry,
+  },
 };
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -70,6 +70,27 @@ p {
 
 ul {
   list-style-type: none;
+  margin-left: 10px;
 }
 
+ul li {
+    margin: 3px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+}
+input {
+    padding: 10px 15px;
+    border: none;
+    background-color: #191919;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    margin: 5px 0;
+
+}
 </style>
