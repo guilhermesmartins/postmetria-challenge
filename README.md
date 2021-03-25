@@ -28,7 +28,7 @@ After everything started, the standard port for the backend is 8000 and for the 
 
 There are 3 routes in this application, inside the api.php file, related to /country/: the POST route /country/{country_name}, the GET route /country/{country_name} and the GET /countries. 
 
-##How It Works
+## How It Works
 The POST route picks the country name by the parameter "country_name", makes a curl request to the public API "Rest Countries V2" with the proper headers attached, executes the function and receives a response, closes the curl and if there is an error it will return this curl error. If there isn't an error, the var $data will handle the decoded JSON $response, select a few data from this response and save it in the entity Country. 
 
 The first GET route, /country/{country_name}, will get a country name by the param of the same name and search for a country with this name. Since the param comes with the string in lowercase, a function ucfirst is called to capitalize the first letter of the string, in the same way that the values of the field "name" in the table "countries" are stored. 
@@ -42,3 +42,5 @@ The migrations are stored inside the migrations directory, from the database fol
 The frontend is developed in Vue, and interacts directly with the blade file (welcome.blade.php). Inside the JS folder, vue contains the components used in the application, and the App.vue file, that agroups all the components in the main and unique page of the application. 
 
 The file webpack.mix.js contains the configs needed for webpack to work well.
+
+This is my first project with Laravel, so any suggestion is very well accepted!
