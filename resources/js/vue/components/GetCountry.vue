@@ -5,7 +5,7 @@
       <BaseButton
         :loading="loading"
         :disabled="loading"
-        @click="postCountry"
+        @click="getCountry"
         >Search</BaseButton
       >
     </form>
@@ -42,7 +42,7 @@ export default {
     };
   },
   methods: {
-    async postCountry() {
+    async getCountry() {
       if (this.loading) return;
       this.loading = true;
       try {

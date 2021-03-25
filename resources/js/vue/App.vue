@@ -13,13 +13,14 @@
     <h1>Routes</h1>
     <PostCountry />
     <GetCountry />
-    <Route title="Pick all countries" method="GET" path="/countries"> </Route>
+    <GetCountries />
   </div>
 </template>
 
 <script>
 import PostCountry from "./components/PostCountry.vue";
 import GetCountry from "./components/GetCountry.vue";
+import GetCountries from "./components/GetCountries.vue";
 import Route from "./components/Route.vue";
 
 export default {
@@ -28,6 +29,7 @@ export default {
     Route,
     PostCountry,
     GetCountry,
+    GetCountries,
   },
 };
 </script>
