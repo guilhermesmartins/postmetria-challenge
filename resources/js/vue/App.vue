@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>RUPAU Laravel</h1>
+    <h1>VUE Laravel</h1>
     <p>
       This project utilizes Laravel as the backend framework and VueJS for
       Front, so PHP, Composer, Laravel, Vue, Node, NPM/Yarn are needed to run
